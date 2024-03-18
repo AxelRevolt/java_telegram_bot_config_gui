@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<title>Benvenuto</title>
+
+	<!-- Custom CSS tets -->
+	<!-- <link rel="stylesheet" media="screen" th:href="@{/css/css.css}" /> -->
+
+	<style>
+		body {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+		}
+
+		.popup {
+			display: none;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			padding: 20px;
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			z-index: 999;
+		}
+
+		::placeholder {
+			text-align: center;
+		}
+
+		/* Aggiungi stili per il footer */
+		footer {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			background-color: #333;
+			padding: 10px 0;
+			color: white;
+			text-align: center;
+		}
+
+		.form-check {
+			display: block;
+			margin: 0 auto;
+		}
+
+		/*test*/
+		/* Style the popup */
+		#listBotPopup {
+			/* Adjust width and height as desired */
+			width: auto;
+			/* Example width */
+			height: auto;
+			/* Ensure the popup is on top of other elements */
+			overflow-y: scroll;
+		}
+
+		.popup {
+			position: fixed;
+			/* Keep the popup positioned */
+			top: 50%;
+			/* Center vertically */
+			left: 50%;
+			/* Center horizontally */
+			transform: translate(-50%, -50%);
+			/* Account for offset due to positioning */
+			background-color: #fff;
+			/* Set background color */
+			border: 1px solid #ccc;
+			/* Add a border */
+			padding: 20px;
+			/* Add padding for content */
+			/* Example height */
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+			/* Add a subtle shadow */
+			z-index: 10;
+		}
+
+		/* Style the table header */
+		.popup table thead th {
+			text-align: center;
+			/* Center header text */
+			padding: 10px;
+			/* Add padding for header cells */
+			background-color: #f2f2f2;
+			/* Light gray background for headers */
+		}
+
+		/* Style the table body */
+		.popup table tbody tr {
+			border-bottom: 1px solid #ddd;
+			/* Add a table row separator */
+		}
+
+		/* Style the table data cells */
+		.popup table tbody tr td {
+			padding: 10px;
+			/* Add padding for data cells */
+		}
+
+		/* Style the close button */
+		.popup button.close {
+			position: absolute;
+			/* Position the button in the top right corner */
+			top: 10px;
+			right: 10px;
+			padding: 5px 10px;
+			/* Adjust padding as needed */
+			background-color: #ccc;
+			/* Set background color */
+			border: none;
+			/* Remove border */
+			border-radius: 5px;
+			/* Add rounded corners */
+			cursor: pointer;
+			/* Indicate clickable behavior */
+		}
+
+		/* Style the close button on hover */
+		.popup button.close:hover {
+			background-color: #ddd;
+			/* Change background color on hover */
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container text-center">
+		<h1>Welcome</h1>
+		<h1>in your config</h1>
+		<h1>bot</h1>
+		<br>
+		<!--<button class="btn btn-primary" onclick="showStartPopup()">Start bot</button>-->
+		<button class="btn btn-primary" onclick="showRegisterPopup()">Register</button>
+		<button class="btn btn-primary" onclick="showListPopup()">List Bot</button>
+		<br>
+		<br>
+		<!-- Aggiungi un pulsante per chiudere l'app -->
+		<!--<form action="#" th:action="@{/stopBot}" method="post">
+			<input type="hidden" name="id" th:value="${bot.id}" />
+			<button type="submit" class="btn btn-danger">Stop bot</button>
+		</form>-->
+		<form action="#" th:action="@{/closeApp}">
+			<button class="btn btn-danger" type="submit">Close
+				Web-App</button><!--th:onclick="|window.location.href='/closeApp'|">Close App</button>-->
+		</form>
+
+
+		<!--start bot-->
+		<!--<div id="startPopup" class="popup">
+			<h2>StartBot</h2>
+			<form th:object="${botTelegram}" action="#" th:action="@{/startBot}" method="post" class="form-group">
+				<div class="mb-3 row">
+					<div class="col">
+						<label for="botNameStart">bot name :</label>
+						<input th:field="*{botName}" type="text" name="botName" class="form-control" id="botNameStart"
+							required placeholder="Insert your botName">
+					</div>
+					<div class="col">
+						<label for="botTokenStart">bot token :</label>
+						<input th:field="*{botToken}" type="text" name="botToken" class="form-control"
+							id="botTokenStart" required placeholder="Insert your botToken">
+					</div>
+				</div>
+
+				<div class="form-check form-switch mt-3" id="form-check-input">
+					<label class="form-check-label" for="additionalOption">
+						<input type="checkbox" class="form-check-input" id="saveBotData" name="saveBotData">
+						Save this bot</label>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Star</button>
+				<button type="button" class="btn btn-secondary" onclick="closePopup('startPopup')">Chiudi</button>
+			</form>
+		</div>-->
+
+		<!--registrazione-->
+		<div id="registerPopup" class="popup">
+			<h2>Registrazione</h2>
+			<form th:object="${botTelegram}" action="#" th:action="@{/registerBot}" method="post" class="form-group">
+				<div class="mb-3 row">
+					<div class="col">
+						<label for="botNameStart">bot name :</label>
+						<input th:field="*{botName}" type="text" name="botName" class="form-control" id="botNameStart"
+							required placeholder="Insert your botName">
+					</div>
+					<div class="col">
+						<label for="botTokenStart">bot token :</label>
+						<input th:field="*{botToken}" type="text" name="botToken" class="form-control"
+							id="botTokenStart" required placeholder="Insert your botToken">
+					</div>
+					<div class="col">
+						<label for="botDescriptionStart">bot description :</label>
+						<input th:field="*{botDescription}" type="text" name="botDescription" class="form-control"
+							id="botTokenStart" required placeholder="Insert your botToken">
+					</div>
+				</div>
+
+				<div class="mb-3 row">
+					<div class="col">
+						<label for="key">key :</label>
+						<input th:field="*{response.key}" type="text" name="response.key" class="form-control" id="key"
+							required placeholder="Insert your key">
+					</div>
+					<div class="col">
+						<label for="response">response :</label>
+						<input th:field="*{response.responseString}" type="text" name="response.responseString"
+							class="form-control" id="response" required placeholder="Insert your respone">
+					</div>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Save</button>
+				<button type="button" class="btn btn-secondary" onclick="closePopup('registerPopup')">Close</button>
+
+			</form>
+		</div>
+	</div>
+
+	<div id="listBotPopup" class="popup">
+		<h2>Lista Utenti</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>BotName</th>
+					<th>BotToken</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<!-- Utilizzo di Thymeleaf per iterare sulla lista di utenti -->
+				<tr th:each="bot : ${bots}">
+					<td th:text="${bot.botName}"></td>
+					<td th:text="${bot.botToken}"></td>
+					<td>
+						<div class="btn-group">
+							<form action="#" th:action="@{/startBot}" method="post">
+								<input type="hidden" name="botToken" th:value="${bot.botToken}" />
+								<input type="hidden" name="botName" th:value="${bot.botName}" />
+								<input type="hidden" name="id" th:value="${bot.id}" />
+								<button type="submit" class="btn btn-primary">Start</button>
+							</form>
+							<!--<form action="#" th:action="@{/stopBot}" method="post">
+								<input type="hidden" name="id" th:value="${bot.id}" />
+								<button type="submit" class="btn btn-danger">Stop bot</button>
+							</form>-->
+							<form action="#" th:action="@{/toBotModify}" method="post">
+								<input type="hidden" name="botToken" th:value="${bot.botToken}" />
+								<input type="hidden" name="botName" th:value="${bot.botName}" />
+								<input type="hidden" name="id" th:value="${bot.id}" />
+								<button type="submit" class="btn btn-primary">Modify</button>
+							</form>
+							<form action="#" th:action="@{/delete}" method="post">
+								<input type="hidden" name="id" th:value="${bot.id}" />
+								<button type="submit" class="btn btn-danger">Delete</button>
+							</form>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+		<button type="button" class="btn btn-secondary container text-center"
+			onclick="closePopup('listBotPopup')">Close</button>
+
+	</div>
+
+	<!-- Aggiungi un footer -->
+	<footer>
+		<p th:text="${stringTest}"></p>
+		<p>&copy; 2023 Your Company Name. All rights reserved.</p>
+	</footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		function showStartPopup() {
+			document.getElementById('startPopup').style.display = 'block';
+			document.getElementById('registerPopup').style.display = 'none';
+			document.getElementById('listBotPopup').style.display = 'none';
+		}
+
+		function showRegisterPopup() {
+			document.getElementById('registerPopup').style.display = 'block';
+			document.getElementById('startPopup').style.display = 'none';
+			document.getElementById('listBotPopup').style.display = 'none';
+		}
+
+		function showListPopup() {
+			document.getElementById('listBotPopup').style.display = 'block';
+			document.getElementById('registerPopup').style.display = 'none';
+			document.getElementById('startPopup').style.display = 'none';
+		}
+
+		function closePopup(popupId) {
+			document.getElementById(popupId).style.display = 'none';
+		}
+
+		//add response
+		function addResponse() {
+			const responseTemplate = document.querySelector('#response-template');
+			const responseContainer = document.querySelector('#response-container');
+			const newResponse = responseTemplate.content.cloneNode(true);
+			responseContainer.appendChild(newResponse);
+		}
+
+		function removeResponse(event) {
+			const responseItem = event.target.closest('.response-item');
+			responseItem.remove();
+		}
+
+		// Assegna il listener per la rimozione delle risposte
+		const removeButtons = document.querySelectorAll('.remove-response');
+		removeButtons.forEach(button => button.addEventListener('click', removeResponse));
+
+
+	</script>
+</body>
+
+</html>

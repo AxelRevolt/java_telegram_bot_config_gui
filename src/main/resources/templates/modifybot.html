@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifica Account</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container mt-5 mx-auto">
+        <h1 class="mb-4 text-center">Modifica Account</h1>
+
+        <form th:object="${bot}" action="#" th:action="@{/saveBotModify}" method="post" class="form-group">
+
+            <div class="mb-3 row">
+                <div class="col-sm-6">
+                    <label for="botName" class="col-form-label">bot name :</label>
+                    <input th:field="*{botName}" type="text" name="botName" class="form-control" required
+                        text="Insert your botName">
+                </div>
+                <div class="col-sm-6">
+                    <label for="botToken" class="col-form-label">bot token :</label>
+                    <input th:field="*{botToken}" type="text" name="botToken" class="form-control" required
+                        text="Insert your botToken">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-sm-6">
+                    <label for="response.key" class="col-form-label">bot key response :</label>
+                    <input th:field="*{response.key}" type="text" name="response.key" class="form-control" 
+                        text="Insert your botName">
+                </div>
+                <div class="col-sm-6">
+                    <label for="response.responseString" class="col-form-label">bot response :</label>
+                    <input th:field="*{response.responseString}" type="text" name="response.responseString" class="form-control" 
+                        text="Insert your botToken">
+                </div>
+            </div>
+
+            <!-- Pulsanti -->
+            <div class="form-group text-center">
+                <input type="hidden" name="id" th:value="${bot.id}" />
+                <button class="btn btn-primary" type="submit">Save data</button>
+            </div>
+
+        </form>
+
+        <form action="#" th:action="@{/index}" method="get" class="form-group text-center">
+            <button class="btn btn-danger">Home</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+
+    <script>
+
+    </script>
+
+</body>
+
+</html>
