@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "chatId": 0,
+    "channelId": 0,
+    "botName": "000",
+    "botToken": "admin@00",
+    "botDescription": "test",
+    "response": {
+      "key": "key0",
+      "responseString": "test"
+    }
+  }
+]
